@@ -1,0 +1,28 @@
+{
+  "name": "mv/error-log-bundle",
+  "type": "bundle",
+  "description": "Bundle log app errors in db",
+  "keywords": ["error,log,orm"],
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "Michaël VEROUX",
+      "homepage": "https://github.com/phpmike"
+    }
+  ],
+  "require": {
+    "symfony/symfony": "~2.7",
+    "doctrine/doctrine-bundle": "~1.2"
+  },
+  "archive": {
+    "exclude": ["Tests/", "build/", "/.travis.yml", "/build.xml", "phpunit.xml.dist"]
+  },
+  "autoload": {
+    "psr-4": { "Mv\\ErrorLogBundle\\": "" }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.x-dev"
+    }
+  }
+}

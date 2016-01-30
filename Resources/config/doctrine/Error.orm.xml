@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping" >
+    <entity name="Mv\ErrorLogBundle\Entity\Error" table="mv_error_log">
+
+        <indexes>
+            <index columns="created" name="created_idx"/>
+            <index columns="route" name="route_idx" />
+            <index columns="controller" name="controller_idx" />
+            <index columns="uri" name="uri_idx" />
+            <index columns="e_user" name="user_idx" />
+            <index columns="e_code" name="code_idx" />
+            <index columns="route" name="route_idx" />
+        </indexes>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="message" type="string" length="1000" />
+        <field name="type" column="e_type" type="string" length="100" />
+        <field name="file" column="e_file" type="string" length="500" />
+        <field name="line" column="e_line" type="integer" nullable="true" />
+        <field name="trace" type="text" nullable="true" />
+        <field name="code" column="e_code" type="smallint" nullable="true" />
+        <field name="route" type="string" length="100" nullable="true" />
+        <field name="controller" type="string" length="240" nullable="true" />
+        <field name="user" column="e_user" type="string" length="180" nullable="true" />
+        <field name="uri" type="string" length="240" nullable="true" />
+        <field name="userContext" column="user_context" type="text" nullable="true" />
+        <field name="userAgent" column="user_agent" type="string" length="240" nullable="true" />
+        <field name="created" type="datetime" />
+    </entity>
+</doctrine-mapping>

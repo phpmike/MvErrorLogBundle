@@ -1,0 +1,11 @@
+monolog:
+    handlers:
+        error_log:
+            type: fingers_crossed
+            action_level: warning
+            handler: db
+            channels: mv_error_log
+        db:
+            type: service
+            id: mv_error_log.db_storage
+            channels: mv_error_log

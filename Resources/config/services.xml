@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="mv_error_log.db_storage.class">Mv\ErrorLogBundle\Log\DbStorage</parameter>
+        <parameter key="mv_error_log.exception_listener.class">Mv\ErrorLogBundle\Listener\ExceptionListener</parameter>
+        <parameter key="mv_error_log.last_error.class">Mv\ErrorLogBundle\Log\LastError</parameter>
+    </parameters>
+
+    <services>
+        <service id="mv_error_log.last_error" class="%mv_error_log.last_error.class%"/>
+        <service id="mv_error_log.exception_listener" class="%mv_error_log.exception_listener.class%">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" priority="255" />
+            <tag name="monolog.logger" channel="mv_error_log" />
+            <argument>%twig.exception_listener.controller%</argument>
+            <argument type="service" id="mv_error_log.last_error" />
+            <argument type="service" id="logger" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="session.flash_bag" on-invalid="null" />
+            <argument type="string">%kernel.environment%</argument>
+        </service>
+        <service id="mv_error_log.db_storage" class="%mv_error_log.db_storage.class%">
+            <argument type="service" id="mv_error_log.last_error" />
+            <call method="setEntityManager">
+                <argument id="doctrine.orm.entity_manager" type="service" />
+            </call>
+            <call method="setContainer">
+                <argument id="service_container" type="service" />
+            </call>
+        </service>
+    </services>
+</container>
