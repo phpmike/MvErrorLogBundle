@@ -2,7 +2,7 @@
   "name": "mv/error-log-bundle",
   "type": "bundle",
   "description": "Bundle log app errors in db",
-  "keywords": ["error,log,orm"],
+  "keywords": ["error log orm symfony"],
   "license": "GPL",
   "authors": [
     {
