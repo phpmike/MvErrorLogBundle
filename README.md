@@ -12,7 +12,7 @@ You will have trace and same precisions than dev mode in your log.
 INSTALLATION with COMPOSER
 --------------------------
 
-    php composer.phar require mv/error-log-bundle:"~1.0"
+    php composer.phar require mv/error-log-bundle:"1.0"
 
 ###1)  Add to your AppKernel.php
 
