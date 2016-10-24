@@ -3,9 +3,9 @@ monolog:
         error_log:
             type: fingers_crossed
             action_level: warning
-            handler: db
+            handler: mv_error_db
             channels: mv_error_log
-        db:
+        mv_error_db:
             type: service
             id: mv_error_log.db_storage
             channels: mv_error_log

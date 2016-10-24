@@ -8,6 +8,7 @@
         <parameter key="mv_error_log.db_storage.class">Mv\ErrorLogBundle\Log\DbStorage</parameter>
         <parameter key="mv_error_log.exception_listener.class">Mv\ErrorLogBundle\Listener\ExceptionListener</parameter>
         <parameter key="mv_error_log.last_error.class">Mv\ErrorLogBundle\Log\LastError</parameter>
+        <parameter key="mv_error_log.processor.class">Mv\ErrorLogBundle\Processor\ExtraProcessor</parameter>
     </parameters>
 
     <services>
@@ -23,13 +24,13 @@
             <argument type="string">%kernel.environment%</argument>
         </service>
         <service id="mv_error_log.db_storage" class="%mv_error_log.db_storage.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="mv_error_log.last_error" />
-            <call method="setEntityManager">
-                <argument id="doctrine.orm.entity_manager" type="service" />
-            </call>
-            <call method="setContainer">
-                <argument id="service_container" type="service" />
-            </call>
+        </service>
+        <service id="mv_error_log.processor" class="%mv_error_log.processor.class%">
+            <tag name="monolog.processor" method="processRecord" />
+            <argument type="service" id="security.token_storage" on-invalid="ignore" />
+            <argument type="service" id="request_stack" on-invalid="ignore" />
         </service>
     </services>
 </container>

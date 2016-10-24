@@ -39,32 +39,13 @@ class DbStorage extends AbstractProcessingHandler
     /**
      * DbStorage constructor.
      *
-     * @param LastError $lastError
-     */
-    public function __construct(LastError $lastError)
-    {
-        $this->lastError = $lastError;
-    }
-
-    /**
      * @param EntityManager $entityManager
+     * @param LastError     $lastError
      */
-    public function setEntityManager(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, LastError $lastError)
     {
         $this->entityManager = $entityManager;
-    }
-
-    /**
-     * @param Container $container
-     *
-     * @return $this
-     * @author Michaël VEROUX
-     */
-    public function setContainer(Container $container)
-    {
-        $this->container = $container;
-
-        return $this;
+        $this->lastError = $lastError;
     }
 
     /**
@@ -86,9 +67,6 @@ class DbStorage extends AbstractProcessingHandler
     {
         $this->record = $record;
 
-        /** @var \Symfony\Component\HttpFoundation\Request|null $request */
-        $request = $this->container->isScopeActive('request') ? $this->container->get('request') : null;
-
         $error = new Error();
         $error->setMessage($this->getFromRecord('message'));
         $error->setFile($this->getFile());
@@ -96,17 +74,14 @@ class DbStorage extends AbstractProcessingHandler
         $error->setTrace($this->getTrace());
         $error->setType($this->getType());
         $error->setCode($this->getCode());
-        if ($request) {
-            $error->setUri($request->getRequestUri());
-            $error->setRoute($request->get('_route'));
-            $error->setController($request->get('_controller'));
-            $error->setUserAgent($request->headers->get('User-Agent'));
-        }
 
-        if ($this->container->get('security.token_storage')->getToken() instanceof TokenInterface) {
-            $error->setUserContext($this->container->get('security.token_storage')->getToken());
-            $error->setUser($this->container->get('security.token_storage')->getToken()->getUsername());
-        }
+        $error->setUri($this->getFromRecordExtra('uri'));
+        $error->setRoute($this->getFromRecordExtra('route'));
+        $error->setController($this->getFromRecordExtra('controller'));
+        $error->setUserAgent($this->getFromRecordExtra('userAgent'));
+
+        $error->setUserContext($this->getFromRecordExtra('userContext'));
+        $error->setUser($this->getFromRecordExtra('user'));
 
         if (!$this->entityManager->isOpen()) {
             $this->entityManager = $this->entityManager->create(
@@ -146,6 +121,22 @@ class DbStorage extends AbstractProcessingHandler
         $context = $this->getFromRecord('context');
         if ('' !== $context && isset($context[$name])) {
             return $context[$name];
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * @param $name
+     *
+     * @return string
+     * @author Michaël VEROUX
+     */
+    private function getFromRecordExtra($name)
+    {
+        $extra = $this->getFromRecord('extra');
+        if ('' !== $extra && isset($extra[$name])) {
+            return $extra[$name];
         } else {
             return '';
         }
