@@ -3,7 +3,7 @@
   "type": "bundle",
   "description": "Bundle log app errors in db",
   "keywords": ["error", "log", "bundle", "orm", "symfony"],
-  "license": "GPL",
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Michaël VEROUX",
