@@ -85,7 +85,7 @@ class ExceptionListener extends BaseExceptionListener
             ) {
                 $this->loggerDb->error($event->getException()->getMessage(), array('exception' => $event->getException()));
                 if ($this->flashBag) {
-                    if (null == $this->lastError->getId()) {
+                    if (null === $this->lastError->getId()) {
                         $this->flashBag->add('error', 'Une erreur est survenue');
                     } else {
                         $this->flashBag->add('error', sprintf('Une erreur est survenue #%s', $this->lastError->getId()));

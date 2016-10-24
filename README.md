@@ -5,6 +5,8 @@ Bundle for symfony2 >=2.7 that log app errors in db.
 This doesn't log HTTP exceptions and Access denied exceptions. This was made only for bug tracking.
 You will have trace and same precisions than dev mode in your log.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/022bd576-8207-4ab8-93c1-f101393dabf7/small.png)](https://insight.sensiolabs.com/projects/022bd576-8207-4ab8-93c1-f101393dabf7)
+
 [![Total Downloads](https://poser.pugx.org/mv/error-log-bundle/d/total.png)](https://packagist.org/packages/mv/error-log-bundle)
 
 [![Latest Stable Version](https://poser.pugx.org/mv/error-log-bundle/version.png)](https://packagist.org/packages/mv/error-log-bundle)

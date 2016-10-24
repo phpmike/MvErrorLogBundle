@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Monolog\Handler\AbstractProcessingHandler;
 use Mv\ErrorLogBundle\Entity\Error;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Class DbStorage
