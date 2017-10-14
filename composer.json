@@ -11,8 +11,8 @@
     }
   ],
   "require": {
-    "symfony/symfony": "~2.7",
-    "doctrine/doctrine-bundle": "~1.2"
+    "symfony/symfony": ">=2.7, <4.0",
+    "doctrine/doctrine-bundle": ">=1.2"
   },
   "archive": {
     "exclude": ["Tests/", "build/", "/.travis.yml", "/build.xml", "phpunit.xml.dist"]
@@ -22,7 +22,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.x-dev"
+      "dev-master": "2.x-dev"
     }
   }
 }

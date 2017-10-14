@@ -1,7 +1,7 @@
 MvErrorLogBundle
 ============
 
-Bundle for symfony2 >=2.7 that log app errors in db.
+Bundle for Symfony2 >=2.8 and Symfony 3 that log app errors in db. (Symfony <= 2.7, see 1.x)
 This doesn't log HTTP exceptions and Access denied exceptions. This was made only for bug tracking.
 You will have trace and same precisions than dev mode in your log.
 
@@ -14,7 +14,7 @@ You will have trace and same precisions than dev mode in your log.
 INSTALLATION with COMPOSER
 --------------------------
 
-    php composer.phar require mv/error-log-bundle:"1.0"
+    php composer.phar require mv/error-log-bundle:"2.0"
 
 ###1)  Add to your AppKernel.php
 

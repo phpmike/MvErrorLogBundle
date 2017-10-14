@@ -14,7 +14,7 @@
     <services>
         <service id="mv_error_log.last_error" class="%mv_error_log.last_error.class%"/>
         <service id="mv_error_log.exception_listener" class="%mv_error_log.exception_listener.class%">
-            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" priority="-128" />
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" priority="-127" />
             <tag name="monolog.logger" channel="mv_error_log" />
             <argument>%twig.exception_listener.controller%</argument>
             <argument type="service" id="mv_error_log.last_error" />
